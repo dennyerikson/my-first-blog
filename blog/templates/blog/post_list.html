@@ -1,45 +1,26 @@
-<html>
-     {% load staticfiles %}
-    <head>
-            <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-           <!--  <a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page"></a> -->
-            <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-            <a href="https://icons8.com">Icon pack by Icons8</a>
-
-        <title>Django Girls</title>
-    </head>
-    <body>
-        <div class="page-header">
-            <h1><a href="/">Django Girls</a></h1>
+{% extends 'blog/base.html' %}
+{% block content %}
+   
+    {% for post in posts %}
+    <div class="post">
+        <div class="date">
+            {{ post.published_date }}
         </div>
-
-        <div class="content container">
-                <div class="row">
-                    <div class="col-md-8">
-                    {% for post in posts %}
-                    <div class="post">
-                        <p>published: {{ post.published_date }}</p>
-                        <h1><a href="">{{ post.title }}</a></h1>
-                        <p>{{ post.text|linebreaksbr }}</p>
-                    </div>
-
-        {% endfor %}
-            </div>
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>       
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+    {% endfor %}
         </div>
-
-        <p>The .img-responsive class makes the image scale nicely to the parent element (resize the browser window to see the effect):</p>
-
-
-            <img src="https://png.icons8.com/metro/50/828282/swipe-right.png" style="width:26; float:right;"/>
-            <img src="https://png.icons8.com/metro/50/828282/swipe-left.png" style="width:26; float:left; "/>
-
-                <img src="https://s3-us-west-2.amazonaws.com/estudante-production/app/public/ckeditor_assets/pictures/128/original/anhanguera_full.svg"
-                class="img-responsive" alt="Cinque Terre" width="150" height="150">
-
     </div>
 
-    </body>
-</html>
+    <p>The .img-responsive class makes the image scale nicely to the parent element (resize the browser window to see the effect):</p>
+
+
+    <img src="https://png.icons8.com/metro/50/828282/swipe-right.png" style="width:26; float:right;"/>
+    <img src="https://png.icons8.com/metro/50/828282/swipe-left.png" style="width:26; float:left; "/>
+
+    <img src="https://s3-us-west-2.amazonaws.com/estudante-production/app/public/ckeditor_assets/pictures/128/original/anhanguera_full.svg"
+    class="img-responsive" alt="Cinque Terre" width="150" height="150">
+
+   
+{% endblock %}
